@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JOONS-ME Consulting Agency Ltd — Software, Hardware, People, Code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #0A0A32;
+    --navy-2: #0D0D3E;
+    --navy-panel: #14144a;
+    --purple: #6C3483;
+    --purple-dark: #4A1480;
+    --gold: #E8A838;
+    --gold-soft: #f3c976;
+    --teal: #00C3E3;
+    --cream: #F7F4EC;
+    --ink: #0D0D3E;
+    --line: rgba(246,243,236,0.13);
+    --line-soft: rgba(13,13,62,0.10);
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--navy);
+    color:var(--cream);
+    font-family:var(--body);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;position:relative;z-index:2;}
+  ::selection{background:var(--gold);color:var(--navy);}
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:3px;
+  }
+
+  h1,h2,h3,h4{font-family:var(--display);font-weight:600;letter-spacing:-0.02em;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.02em;
+    color:var(--teal);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:20px;
+  }
+  .eyebrow::before{content:"$";color:var(--gold);}
+  .light .eyebrow::before{color:var(--purple);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(10,10,50,0.78);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:1180px;margin:0 auto;padding:18px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{
+    font-family:var(--mono);font-weight:600;font-size:16px;letter-spacing:0.01em;
+    color:var(--cream);
+  }
+  .logo span{color:var(--gold);}
+  .nav-links{display:flex;gap:36px;align-items:center;}
+  .nav-links a:not(.nav-cta){
+    font-size:14.5px;color:rgba(246,243,236,0.72);
+    position:relative;padding-bottom:3px;
+  }
+  .nav-links a:not(.nav-cta)::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);
+    transition:width .25s ease;
+  }
+  .nav-links a:not(.nav-cta):hover{color:var(--cream);}
+  .nav-links a:not(.nav-cta):hover::after{width:100%;}
+  .nav-cta{
+    font-family:var(--mono);font-size:13px;padding:9px 18px;
+    border:1px solid var(--gold);border-radius:2px;color:var(--gold)!important;
+    transition:all .2s ease;
+  }
+  .nav-cta:hover{background:var(--gold);color:var(--navy)!important;}
+  .menu-toggle{display:none;background:none;border:none;color:var(--cream);font-size:26px;cursor:pointer;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:184px 0 130px;
+    background:var(--navy);
+    isolation:isolate;
+  }
+  .hero-bg{
+    position:absolute;inset:0;z-index:0;overflow:hidden;
+  }
+  .hero-bg::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 700px 500px at 88% -6%, rgba(108,52,131,0.55), transparent 60%),
+      radial-gradient(ellipse 600px 500px at -8% 40%, rgba(0,195,227,0.14), transparent 55%),
+      radial-gradient(ellipse 500px 400px at 60% 100%, rgba(232,168,56,0.08), transparent 60%);
+  }
+  .circuit{position:absolute;top:0;right:0;width:60%;height:100%;opacity:0.5;}
+
+  .hero-grid{
+    display:grid;grid-template-columns:1.08fr 0.92fr;gap:60px;align-items:center;
+    position:relative;
+  }
+  .hero-kicker{
+    font-family:var(--mono);font-size:12.5px;color:rgba(246,243,236,0.45);
+    letter-spacing:0.08em;text-transform:uppercase;margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(40px,5.4vw,64px);
+    line-height:1.04;
+    margin-bottom:26px;
+  }
+  .hero h1 .accent{
+    background:linear-gradient(100deg, var(--gold), var(--gold-soft) 60%, var(--teal));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.lede{
+    font-size:18px;color:rgba(246,243,236,0.75);max-width:480px;margin-bottom:36px;
+  }
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono);font-size:13.5px;padding:15px 28px;border-radius:2px;
+    display:inline-flex;align-items:center;gap:9px;transition:all .22s ease;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--gold);color:var(--navy);box-shadow:0 12px 30px rgba(232,168,56,0.18);}
+  .btn-primary:hover{background:var(--gold-soft);transform:translateY(-2px);box-shadow:0 16px 34px rgba(232,168,56,0.28);}
+  .btn-ghost{border-color:var(--line);color:var(--cream);}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
+
+  /* terminal panel */
+  .terminal-wrap{position:relative;}
+  .terminal-wrap::before{
+    content:"";position:absolute;inset:-14px -14px auto auto;width:100%;height:100%;
+    border:1px solid var(--line);border-radius:10px;z-index:-1;
+  }
+  .terminal{
+    background:#07071e;
+    border:1px solid var(--line);
+    border-radius:10px;
+    box-shadow:0 40px 90px rgba(0,0,0,0.55), 0 0 0 1px rgba(0,195,227,0.05);
+    overflow:hidden;
+  }
+  .terminal-bar{
+    display:flex;align-items:center;gap:8px;
+    padding:13px 16px;background:#0e0e36;border-bottom:1px solid var(--line);
+  }
+  .terminal-bar span{width:10px;height:10px;border-radius:50%;background:#3a3a6b;}
+  .terminal-bar span:nth-child(1){background:#e8746a;}
+  .terminal-bar span:nth-child(2){background:#e8c15a;}
+  .terminal-bar span:nth-child(3){background:#5ecb8f;}
+  .terminal-title{
+    margin-left:8px;font-family:var(--mono);font-size:12px;color:rgba(246,243,236,0.42);
+  }
+  .terminal-body{
+    padding:28px 26px 34px;font-family:var(--mono);font-size:14px;min-height:280px;
+  }
+  .terminal-line{color:rgba(246,243,236,0.5);margin-bottom:14px;}
+  .terminal-line .prompt{color:var(--teal);}
+  .terminal-line .out{color:var(--gold);display:block;margin-top:6px;margin-left:18px;}
+  #typed-line{color:var(--cream);}
+  .cursor{
+    display:inline-block;width:8px;height:16px;background:var(--gold);
+    vertical-align:middle;margin-left:2px;animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:118px 0;position:relative;}
+  .section-head{max-width:640px;margin-bottom:60px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head h2{font-size:clamp(30px,3.6vw,40px);}
+  .section-head p{color:rgba(246,243,236,0.68);margin-top:16px;font-size:16.5px;}
+
+  .light{
+    background:var(--cream);color:var(--ink);
+    clip-path:polygon(0 56px, 100% 0, 100% 100%, 0 100%);
+    padding-top:170px;
+    margin-top:-56px;
+  }
+  .light .section-head p{color:rgba(13,13,62,0.62);}
+  .light + .light{clip-path:none;margin-top:0;padding-top:118px;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;align-items:start;}
+  .about-grid p{color:rgba(246,243,236,0.76);margin-bottom:16px;font-size:16.5px;}
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px;}
+  .stat{
+    border:1px solid var(--line);border-radius:8px;padding:22px 18px;
+    background:linear-gradient(160deg, rgba(0,195,227,0.06), rgba(255,255,255,0.02));
+  }
+  .stat .n{font-family:var(--display);font-size:32px;color:var(--gold);}
+  .stat .l{font-family:var(--mono);font-size:11.5px;color:rgba(246,243,236,0.5);margin-top:8px;}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .svc-card{
+    position:relative;
+    border:1px solid var(--line-soft);border-radius:12px;padding:34px 30px;
+    background:#fff;
+    box-shadow:0 1px 0 rgba(13,13,62,0.03);
+    transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+  }
+  .svc-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 26px 50px rgba(13,13,62,0.12);
+    border-color:rgba(108,52,131,0.3);
+  }
+  .svc-icon{width:40px;height:40px;margin-bottom:20px;color:var(--purple);}
+  .svc-tag{
+    font-family:var(--mono);font-size:12px;color:var(--purple);margin-bottom:6px;display:block;
+  }
+  .svc-card h3{font-size:22px;margin-bottom:10px;}
+  .svc-card p{color:rgba(13,13,62,0.62);font-size:15px;margin-bottom:18px;}
+  .svc-list{list-style:none;font-family:var(--mono);font-size:12.5px;color:rgba(13,13,62,0.5);}
+  .svc-list li{padding:6px 0;border-top:1px dashed rgba(13,13,62,0.14);}
+  .svc-list li:first-child{border-top:none;}
+
+  /* ---------- PORTFOLIO ---------- */
+  .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .port-card{
+    border-radius:12px;overflow:hidden;background:var(--navy-panel);
+    border:1px solid var(--line);
+    transition:transform .28s ease, box-shadow .28s ease;
+  }
+  .port-card:hover{transform:translateY(-6px);box-shadow:0 30px 60px rgba(0,0,0,0.4);}
+  .port-swatch{
+    height:170px;display:flex;align-items:flex-end;padding:16px 20px;position:relative;overflow:hidden;
+    background-size:cover;background-position:top center;
+  }
+  .port-swatch::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(180deg, rgba(10,10,50,0.1) 0%, rgba(10,10,50,0.25) 55%, rgba(10,10,50,0.88) 100%);
+  }
+  .port-swatch::after{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size:16px 16px;
+  }
+  .port-swatch span{font-family:var(--mono);font-size:11.5px;color:rgba(255,255,255,0.92);position:relative;z-index:1;letter-spacing:0.03em;}
+  .port-body{padding:24px 22px 28px;}
+  .port-body h3{font-size:18.5px;margin-bottom:8px;color:var(--cream);}
+  .port-body p{font-size:14px;color:rgba(246,243,236,0.6);margin-bottom:16px;}
+  .port-body a{font-family:var(--mono);font-size:12.5px;color:var(--teal);border-bottom:1px solid rgba(0,195,227,0.4);padding-bottom:1px;}
+  .port-note{
+    margin-top:36px;font-family:var(--mono);font-size:12.5px;color:rgba(246,243,236,0.35);
+  }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .testi-card{
+    position:relative;
+    border-radius:12px;padding:34px 28px 28px;
+    background:#fff;border:1px solid var(--line-soft);
+  }
+  .testi-card:nth-child(2){transform:translateY(20px);}
+  .testi-card .mark{
+    font-family:var(--display);font-size:52px;color:var(--gold);line-height:0.5;
+    display:block;margin-bottom:14px;
+  }
+  .testi-card .quote{font-size:15.5px;color:rgba(13,13,62,0.78);margin-bottom:22px;}
+  .testi-card .who{font-family:var(--mono);font-size:12.5px;color:var(--purple);}
+  .testi-card .who span{color:rgba(13,13,62,0.45);display:block;margin-top:2px;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-section{background:var(--navy);}
+  .contact-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:64px;}
+  .contact-info p{color:rgba(246,243,236,0.72);margin-bottom:30px;font-size:16.5px;max-width:400px;}
+  .info-row{display:flex;gap:16px;margin-bottom:20px;font-size:14.5px;align-items:flex-start;}
+  .info-row .k{font-family:var(--mono);color:var(--teal);min-width:70px;flex-shrink:0;}
+  .info-row .v{color:rgba(246,243,236,0.85);}
+  form{display:grid;gap:18px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  label{
+    font-family:var(--mono);font-size:11.5px;color:rgba(246,243,236,0.5);
+    display:block;margin-bottom:8px;
+  }
+  input,select,textarea{
+    width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--line);
+    border-radius:6px;padding:13px 15px;color:var(--cream);font-family:var(--body);font-size:14.5px;
+    transition:border-color .2s ease;
+  }
+  input:hover,select:hover,textarea:hover{border-color:rgba(246,243,236,0.28);}
+  textarea{resize:vertical;min-height:120px;}
+  input::placeholder,textarea::placeholder{color:rgba(246,243,236,0.3);}
+  .submit-row{display:flex;align-items:center;gap:18px;margin-top:6px;flex-wrap:wrap;}
+  .submit-row button{
+    font-family:var(--mono);font-size:13.5px;background:var(--gold);color:var(--navy);
+    border:none;padding:15px 30px;border-radius:2px;cursor:pointer;transition:all .2s ease;
+    box-shadow:0 12px 26px rgba(232,168,56,0.16);
+  }
+  .submit-row button:hover{background:var(--gold-soft);transform:translateY(-2px);}
+  .form-note{font-size:12.5px;color:rgba(246,243,236,0.4);}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line);padding:44px 0;background:var(--navy);}
+  .foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;}
+  .foot-logo{font-family:var(--mono);font-size:14px;color:rgba(246,243,236,0.55);}
+  .foot-links{display:flex;gap:26px;font-size:13.5px;color:rgba(246,243,236,0.5);}
+  .foot-links a:hover{color:var(--gold);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:920px){
+    .hero-grid{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;gap:38px;}
+    .services-grid{grid-template-columns:1fr;}
+    .portfolio-grid{grid-template-columns:1fr 1fr;}
+    .testi-grid{grid-template-columns:1fr;}
+    .testi-card:nth-child(2){transform:none;}
+    .contact-grid{grid-template-columns:1fr;}
+    .nav-links{
+      position:fixed;top:64px;left:0;right:0;bottom:0;
+      background:var(--navy);flex-direction:column;padding:36px 32px;gap:26px;
+      transform:translateX(100%);transition:transform .3s ease;
+    }
+    .nav-links.open{transform:translateX(0);}
+    .menu-toggle{display:block;}
+    .light{clip-path:polygon(0 34px, 100% 0, 100% 100%, 0 100%);padding-top:130px;margin-top:-34px;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .field-row{grid-template-columns:1fr;}
+    .portfolio-grid{grid-template-columns:1fr;}
+    .hero{padding:150px 0 90px;}
+    section{padding:84px 0;}
+    .light{padding-top:110px;}
+    .stat-row{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .cursor{animation:none;}
+    .svc-card,.port-card,.btn,.submit-row button{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#top" class="logo">JOONS<span>-</span>ME</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact" class="nav-cta">Start a project</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <svg class="circuit" viewBox="0 0 600 700" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M600 60H460a20 20 0 0 0-20 20v80a20 20 0 0 1-20 20H300" stroke="#00C3E3" stroke-opacity="0.28" stroke-width="1.5"/>
+        <path d="M600 180H500a16 16 0 0 0-16 16v140" stroke="#E8A838" stroke-opacity="0.25" stroke-width="1.5"/>
+        <path d="M600 340H430a18 18 0 0 1-18-18V230" stroke="#6C3483" stroke-opacity="0.35" stroke-width="1.5"/>
+        <path d="M600 480H480a20 20 0 0 0-20 20v90a20 20 0 0 1-20 20H340" stroke="#00C3E3" stroke-opacity="0.22" stroke-width="1.5"/>
+        <path d="M600 620H520" stroke="#E8A838" stroke-opacity="0.2" stroke-width="1.5"/>
+        <circle cx="300" cy="180" r="4" fill="#00C3E3" fill-opacity="0.5"/>
+        <circle cx="430" cy="230" r="4" fill="#6C3483" fill-opacity="0.6"/>
+        <circle cx="340" cy="610" r="4" fill="#00C3E3" fill-opacity="0.5"/>
+        <circle cx="500" cy="180" r="3" fill="#E8A838" fill-opacity="0.5"/>
+        <rect x="270" y="160" width="60" height="40" rx="4" stroke="#00C3E3" stroke-opacity="0.3" stroke-width="1.5"/>
+        <rect x="400" y="200" width="60" height="60" rx="4" stroke="#6C3483" stroke-opacity="0.4" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-kicker">Joons-Me Consulting Agency Ltd</div>
+        <h1>Software, hardware,<br>and the <span class="accent">people</span> who run them.</h1>
+        <p class="lede">We advise technical teams on what to build, how to build it, and who should be building it — then teach the next engineers to do it themselves.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Start a project →</a>
+          <a href="#services" class="btn btn-ghost">See what we do</a>
+        </div>
+      </div>
+
+      <div class="terminal-wrap">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span></span><span></span><span></span>
+            <span class="terminal-title">joons-me — services</span>
+          </div>
+          <div class="terminal-body" id="terminalBody">
+            <div class="terminal-line"><span class="prompt">$</span> <span id="typed-line"></span><span class="cursor"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div>
+        <span class="eyebrow">about.us()</span>
+        <h2>One agency, four practices, one habit of mind.</h2>
+      </div>
+      <div>
+        <p>JOONS-ME Consulting Agency Ltd sits at the intersection of engineering and operations. We're the parent company behind a working portfolio of Nigerian tech and commerce ventures — which means our advice is tested on our own products before it reaches a client's roadmap.</p>
+        <p>We don't hand over a slide deck and disappear. Every engagement — a software audit, a hardware sourcing decision, a team restructure, or a tutoring cohort — ends with something a team can actually run with.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="n">4</div><div class="l">practice areas</div></div>
+          <div class="stat"><div class="n">3+</div><div class="l">portfolio ventures</div></div>
+          <div class="stat"><div class="n">NG</div><div class="l">built for the Nigerian market</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="light">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">services.list()</span>
+        <h2>What we consult on</h2>
+        <p>Four practices, run by people who ship the same work for their own portfolio companies.</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="svc-card">
+          <svg class="svc-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M14 12L6 20l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M26 12l8 8-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 8l-4 24" stroke="currentColor" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span class="svc-tag">$ software</span>
+          <h3>Software Consulting</h3>
+          <p>Architecture reviews, product scoping, and technical due diligence for teams building web, mobile, and backend systems.</p>
+          <ul class="svc-list">
+            <li>Technical architecture &amp; code audits</li>
+            <li>Product scoping and MVP planning</li>
+            <li>Stack selection (Flutter, Laravel, Supabase, and beyond)</li>
+          </ul>
+        </div>
+
+        <div class="svc-card">
+          <svg class="svc-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="12" y="12" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+            <rect x="17" y="17" width="6" height="6" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M12 6v6M20 6v6M28 6v6M12 28v6M20 28v6M28 28v6M6 12h6M6 20h6M6 28h6M28 12h6M28 20h6M28 28h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span class="svc-tag">$ hardware</span>
+          <h3>Hardware Consulting</h3>
+          <p>Advisory on device selection, embedded systems, and infrastructure procurement for teams scaling physical operations.</p>
+          <ul class="svc-list">
+            <li>Infrastructure &amp; equipment sourcing</li>
+            <li>Embedded &amp; device system planning</li>
+            <li>Vendor and cost evaluation</li>
+          </ul>
+        </div>
+
+        <div class="svc-card">
+          <svg class="svc-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="14" r="5" stroke="currentColor" stroke-width="2"/>
+            <circle cx="28" cy="14" r="5" stroke="currentColor" stroke-width="2"/>
+            <circle cx="20" cy="30" r="5" stroke="currentColor" stroke-width="2"/>
+            <path d="M14.5 18l3 8M25.5 18l-3 8M17 14h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span class="svc-tag">$ people</span>
+          <h3>Team &amp; Management Consulting</h3>
+          <p>Org design, hiring frameworks, and process for founders scaling from solo builder to a functioning technical team.</p>
+          <ul class="svc-list">
+            <li>Org structure &amp; role design</li>
+            <li>Hiring &amp; onboarding frameworks</li>
+            <li>Delivery process &amp; sprint cadence</li>
+          </ul>
+        </div>
+
+        <div class="svc-card">
+          <svg class="svc-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M8 10h24v20H8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M14 18l3 3-3 3M20 24h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="svc-tag">$ teach</span>
+          <h3>Programming Tutoring</h3>
+          <p>1:1 and cohort-based coaching across programming languages — from a first script to a shipped, production app.</p>
+          <ul class="svc-list">
+            <li>Python, JavaScript, Dart/Flutter, PHP/Laravel</li>
+            <li>1:1 mentorship and cohort courses</li>
+            <li>Project-based curriculum, built from real apps</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">portfolio.list()</span>
+        <h2>Ventures under JOONS-ME</h2>
+        <p>Our consulting advice is battle-tested on our own companies first.</p>
+      </div>
+      <div class="portfolio-grid">
+
+        <div class="port-card">
+          <div class="port-swatch" style="background-image:url('images/zeefashion.jpg');">
+            <span>ZEE FASHION</span>
+          </div>
+          <div class="port-body">
+            <h3>Zee Fashion</h3>
+            <p>A custom fashion marketplace connecting Nigerian designers directly with buyers.</p>
+            <a href="https://zeefashion.com.ng" target="_blank" rel="noopener">Visit site →</a>
+          </div>
+        </div>
+
+        <div class="port-card">
+          <div class="port-swatch" style="background-image:url('images/ohmoworld.jpg');">
+            <span>OHMOWORLD</span>
+          </div>
+          <div class="port-body">
+            <h3>Ohmoworld</h3>
+            <p>A music and community platform with trainings, events, and membership.</p>
+            <a href="https://ohmoworld.org" target="_blank" rel="noopener">Visit site →</a>
+          </div>
+        </div>
+
+        <div class="port-card">
+          <div class="port-swatch" style="background-image:url('images/eziza.jpg');">
+            <span>EZIZA</span>
+          </div>
+          <div class="port-body">
+            <h3>Eziza</h3>
+            <p>A rider-bidding logistics marketplace for last-mile delivery.</p>
+            <a href="https://zionnite.github.io/eziza/" target="_blank" rel="noopener">Visit site →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="light">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">clients.reviews()</span>
+        <h2>What clients say</h2>
+        <p>Placeholder quotes — replace with real client feedback.</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <span class="mark">“</span>
+          <p class="quote">They rebuilt our onboarding flow in a week and it's still running exactly the way they left it.</p>
+          <div class="who">Tobi Adeyemi<span>Role, Company</span></div>
+        </div>
+        <div class="testi-card">
+          <span class="mark">“</span>
+          <p class="quote">Our team went from three founders to a working engineering department in one quarter.</p>
+          <div class="who">Ngozi Eze<span>Role, Company</span></div>
+        </div>
+        <div class="testi-card">
+          <span class="mark">“</span>
+          <p class="quote">I went from zero Python to shipping my own app in the cohort. Real projects, not slides.</p>
+          <div class="who">Femi Okonkwo<span>Role, Company</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <span class="eyebrow">contact.init()</span>
+        <h2>Start a project</h2>
+        <p>Tell us what you're building, sourcing, restructuring, or learning — we'll reply with next steps within two business days.</p>
+        <div class="info-row"><span class="k">email</span> <span class="v">hello@joons-me.com</span></div>
+        <div class="info-row"><span class="k">phone</span> <span class="v">0903 428 6339</span></div>
+        <div class="info-row"><span class="k">address</span> <span class="v">10, Osemwengie Street, off Akugbe Road, Benin City</span></div>
+      </div>
+      <form id="contactForm">
+        <div class="field-row">
+          <div>
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Your name" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@company.com" required>
+          </div>
+        </div>
+        <div>
+          <label for="practice">Which practice?</label>
+          <select id="practice">
+            <option>Software Consulting</option>
+            <option>Hardware Consulting</option>
+            <option>Team &amp; Management Consulting</option>
+            <option>Programming Tutoring</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div>
+          <label for="message">Project details</label>
+          <textarea id="message" placeholder="What are you building, and what do you need help with?" required></textarea>
+        </div>
+        <div class="submit-row">
+          <button type="submit" id="submitBtn">Send message</button>
+          <span class="form-note" id="formStatus">We reply within 2 business days.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="foot-logo">JOONS-ME CONSULTING AGENCY LTD © 2026</div>
+    <div class="foot-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mobile nav
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // terminal typing effect
+  const commands = [
+    "consult --practice=software",
+    "consult --practice=hardware",
+    "consult --practice=team",
+    "tutor --language=python,dart,php,js"
+  ];
+  const outputs = [
+    "→ architecture review scheduled",
+    "→ infra sourcing brief ready",
+    "→ org design draft sent",
+    "→ cohort enrollment open"
+  ];
+
+  const typedEl = document.getElementById('typed-line');
+  const bodyEl = document.getElementById('terminalBody');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let ci = 0;
+
+  function typeLine(cmd, cb){
+    let i = 0;
+    typedEl.textContent = '';
+    const iv = setInterval(() => {
+      typedEl.textContent += cmd[i];
+      i++;
+      if(i >= cmd.length){
+        clearInterval(iv);
+        setTimeout(cb, 500);
+      }
+    }, 38);
+  }
+
+  function runCycle(){
+    if(reduceMotion){
+      typedEl.textContent = commands[0];
+      return;
+    }
+    typeLine(commands[ci], () => {
+      const out = document.createElement('div');
+      out.className = 'terminal-line out';
+      out.textContent = outputs[ci];
+      bodyEl.insertBefore(out, bodyEl.firstChild.nextSibling);
+
+      setTimeout(() => {
+        ci = (ci + 1) % commands.length;
+        const outs = bodyEl.querySelectorAll('.out');
+        if(outs.length > 2){ outs[0].remove(); }
+        runCycle();
+      }, 1400);
+    });
+  }
+  runCycle();
+
+  // contact form submit
+  const contactForm = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formStatus = document.getElementById('formStatus');
+  const formStatusDefault = formStatus.textContent;
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    formStatus.textContent = 'Sending your message…';
+
+    const payload = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      practice: document.getElementById('practice').value,
+      message: document.getElementById('message').value,
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error('Request failed');
+
+      contactForm.reset();
+      formStatus.textContent = "Message sent — we'll reply within 2 business days.";
+    } catch (err) {
+      formStatus.textContent = 'Something went wrong. Please email hello@joons-me.com directly.';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send message';
+      setTimeout(() => { formStatus.textContent = formStatusDefault; }, 6000);
+    }
+  });
+</script>
+
+</body>
+</html>
